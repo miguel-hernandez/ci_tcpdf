@@ -56,20 +56,6 @@
     var base_url = live_url = "<?= base_url() ?>";
   </script>
 
-  <style>
-    .mdialTamanio{
-      width: 23% !important;
-    }
-    .modal-header {
-      background: #f9a825;
-    }
-  </style>
-
-        <script src="<?= base_url('assets/js/utils.js') ?>"></script>
-        <script src="<?= base_url('assets/js/personal.js') ?>"></script>
-	<!-- VALIDA MOVIL -->
-        <!--<script src="<?= base_url('assets/js/validamobil.js') ?>"></script>-->
-
 </head>
 
 <body class="body-wrapper" id="mainTop">

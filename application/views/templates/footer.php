@@ -123,36 +123,14 @@ $this->load->helper('form');
 <!--ORGINAL SOURCES-->
 <script src="<?= base_url('assets/js/bootstrap-datetimepicker.js') ?>"></script>
 <script  src="<?= base_url('assets/js/bootstrap-datetimepicker.es.js') ?>"></script>
-<script  src="<?= base_url('assets/js/date_lenguaje.js') ?>"></script>
-<script src="<?= base_url('assets/js/form_mensaje.js') ?>"></script>
 
 <!--  JS CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.js"></script>
 
 <!-- JS PROPIOS -->
-<script src="<?= base_url('assets/js/formularios.js') ?>"></script>
 <script src="<?= base_url('assets/js/utilerias/regularexpression.js') ?>"></script>
 <script src="<?= base_url("assets/js/utilerias/constantes.js") ?>"></script>
 <script src="<?= base_url("assets/js/utilerias/helpers.js") ?>"></script>
-
-<script src="<?= base_url("assets/js/index/faqs.js") ?>"></script>
-
-<script>
-  function muestra_reporte_aca(pdf,id_bimestre){
-          var bimestre = (id_bimestre==1 || id_bimestre==3)?"er":(id_bimestre==2)?"do":"to";
-          var dom = '<iframe src="https://docs.google.com/viewer?url='+pdf+'&embedded=true" width="100%" height="500" style="border: none;"></iframe>';
-          $('#modal_reporteaca .modal-header span').empty();
-          $('#modal_reporteaca .modal-header span').html(id_bimestre+bimestre+". Bimestre");
-          $('#modal_reporteaca .modal-body').empty();
-          $('#modal_reporteaca .modal-body').html(dom);
-          $('#modal_reporteaca').modal("show");
-  }// muestra_reporte_aca()
-
-  function muestra_faqs(){
-    Faqs.mostrar();
-  }// muestra_faqs()
-  
-</script>
 
 </body>
 </html>
