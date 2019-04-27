@@ -1,5 +1,4 @@
-
- $("#btn_get_reporte").click(function(e){
+$("#btn_get_reporte").click(function(e){
    e.preventDefault();
     var form = document.createElement("form");
     form.name = "form_rutamejora_reporte";
