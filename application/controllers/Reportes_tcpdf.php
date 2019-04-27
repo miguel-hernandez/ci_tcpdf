@@ -9,7 +9,7 @@ function __construct()
 		$this->load->helper('url');
 		$this->load->library('My_tcpdf');
 		$this->load->library('UtilsWrapper');
-		$this->load->model('Alumno_model');
+
 		$this->load->model('Reportes_model');
 	}// __construct()
 
@@ -172,7 +172,6 @@ EOT;
 	}// carta_responsiva()
 
 	public function ruta_de_mejora(){
-		if (Utilswrapper::verifica_sesion_redirige($this)) {
 			$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
 
 			// set document (meta) information
@@ -197,7 +196,6 @@ EOT;
 			$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
 
 		$pdf->Output('carta_responsiva.pdf', 'I');
-		}// verifica_sesion_redirige
 	}// carta_responsiva()
 
 }
