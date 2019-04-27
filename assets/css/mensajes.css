@@ -1,0 +1,176 @@
+.panel-heading-button{
+    float: left;
+}
+.panel-heading-buttons{
+    float: right;
+}
+
+.panel-heading-title{
+    float: left;
+    width: 200px;
+}
+.panel-heading-medajes{
+    float: left;
+    width: 100%;
+    clear: both;
+}
+.item-mensaje{
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 40px;
+}
+.item-mensaje-title{
+    min-width: 200px;
+    max-width: 70%;
+    float: left;
+
+}
+.item-mensaje-header{
+    margin-top: 10px;
+}   
+.item-mensaje-header{
+    clear: both;
+    float: left;
+    width: 100%;
+
+}
+.item-mensaje-date{
+    width: 130px;
+    float: right;
+}
+
+.item-mensaje-title,
+.item-mensaje-date{
+    background-color: #CCCCCC;
+    padding: 3px;
+
+
+}
+.item-mensaje-title,
+.item-mensaje-date,
+.item-mensaje-body{
+    border-color: #ddd ; 
+}
+.item-mensaje-body{
+    border:  1px solid #ddd; 
+    display: grid;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 95px;
+    overflow: hidden;
+
+}
+.item-mensaje-check{
+    position: absolute;
+    /*right: 5px;*/
+    top:35px;
+    z-index: 2;
+}
+
+#content-mensajes .media-body h3.media-heading {
+  font-size: 24px;
+  line-height: 30px;
+  color: #ffffff;
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  /*text-overflow: ellipsis;*/
+  /*white-space: nowrap;*/
+  /*overflow: hidden;*/
+}
+@media (min-width: 320px) {
+  #content-mensajes .media-body h3.media-heading {
+  width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;	
+  }
+}
+@media (min-width: 992px) {
+  #content-mensajes .media-body h3.media-heading {
+  width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;	
+  }
+}
+@media (min-width: 1200px) {
+  #content-mensajes .media-body h3.media-heading {
+  width: 670px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;	
+  }
+}
+
+.item-mensaje-area{
+    position: absolute;
+    right: 0px;
+    bottom:0px;
+    z-index: 2;
+    background-color: #CCCCCC;
+    padding: 3px;
+    /* x text-transform: uppercase;*/
+}
+.content-mensajes{
+    margin-top: 10px;
+    clear: both;
+    float: left;
+    margin-top: 10px;
+    width: 100%;
+    position: relative;
+}
+.item-mensaje-icon{
+    position: absolute;
+    right: 5px;
+    top:50%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.ajax-mensaje-loading{
+    background-image: url(../images/loadingajax.gif);
+    background-repeat: no-repeat;
+    background-position: center center;    
+    position: absolute;
+    bottom:120px;
+    height: 120px;
+    width: 120px;
+    clear: both;
+    right: 45%;
+    background-color: #FFF;
+    z-index: 2;
+    display: none;
+    
+}
+.mensaje-empty{
+    display: none;
+    float: left;
+    width: 100%;
+    clear: both;
+}
+.complete-mensaje{
+    height: auto!important;
+}
+.overflow-mensaje{
+    cursor: pointer;
+}
+.item-mensaje-tipo{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#divGrupos{
+    text-align: center;
+    background-image: '/assets/images/titulo_grid.png';
+    background-repeat: repeat-x;
+    background-color: #8195AF;
+    font-size: 16px;
+    color: #FFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}

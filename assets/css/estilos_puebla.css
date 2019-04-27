@@ -1,0 +1,265 @@
+.borderless td, .borderless th {
+  border: none !important;
+}
+.no-border-radius-0{
+  border-radius: 0px !important;
+}
+
+.text-success {
+  border: 2px solid rgba(0, 255, 0, 0.8);
+  box-shadow: 0 0 5px rgba(0, 255, 0, 1) !important;
+}
+
+.text-fail {
+  border: 2px solid rgba(255, 0, 0, 0.8);
+  box-shadow: 0 0 5px rgba(255, 0, 0, 1) !important;
+}
+
+.padding-0-t{
+  padding-top:0;
+  /* padding-left:0; */
+}
+.padding-0-r{
+  padding-right:0;
+  /* padding-left:0; */
+}
+.padding-0-l{
+  /* padding-right:0; */
+  padding-left:0;
+}
+.padding-0-b{
+  /* padding-right:0; */
+  padding-bottom: 0 !important;
+}
+
+.margin-0-t{
+  margin-top:0 !important;
+  /* padding-left:0; */
+}
+
+.no-border-radius-r {
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    border-left: 1px solid #f2f2f2;
+    border-right: none !important;
+    border-radius: 5px 0px 0px 5px !important;
+}
+.no-border-radius-l {
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+    border-left: none !important;
+    border-radius: 0px 5px 5px 0px !important;
+}
+
+.text-bold-5{
+  font-weight: 500 !important;
+}
+
+.text-white{
+  color: #FFFFFF !important;
+  font-size: bold !important;
+}
+
+.border-color-primary {
+  border: 1px solid #428BCA;
+}
+.text-color-primary {
+  color: #428BCA !important;
+}
+
+.border-hidden{
+  border: hidden !important;
+}
+.color-grey-dark {
+  color: #808080 !important;
+}
+.bg-color-gray {
+  background-color: #f3f3f3 !important;
+}
+.border-gray{
+  border: 1px solid #f3f3f3;
+}
+
+
+.fieldset_grupos{
+  border: 2px solid #eee !important;
+  margin: 0;
+  xmin-width: 0;
+  padding: 10px;
+  /*position: relative;*/
+  border-radius:4px;
+  /*background-color:#f5f5f5;*/
+  padding-left:10px!important;
+}
+
+.legend_grupos{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom: 0px;
+  border: 2px solid #eee;
+  border-radius: 4px;
+  padding: 5px 5px 5px 10px;
+  background-color: #eee;
+}
+
+.cursor_pointer{
+	cursor:pointer;
+}
+
+.only_uppercase{
+	text-transform:uppercase;
+}
+
+/******************/
+/* TAGs */
+/******************/
+textarea{
+  resize: none;
+}
+
+/******************/
+/* MODAL BOOTSTRAP */
+/******************/
+
+.modalhead-text{
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #ffffff;
+  padding: 10px;
+  text-transform: none;
+}
+
+.modalhead{
+  background-color: #EA77AD !important;
+  color: #FFFFFF !important;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  /*text-transform: uppercase;*/
+  text-transform:none;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.modalhead-green{
+  background-color: #b5d56a !important;
+  color: #FFFFFF !important;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  /*text-transform: uppercase;*/
+  text-transform:none;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.modalhead-yellow{
+  background-color: #f0c24b !important;
+  color: #FFFFFF !important;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  /*text-transform: uppercase;*/
+  text-transform:none;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.modal_btn_close{
+  font-size: 24px !important;
+  color: #FFFFFF !important;
+  font-weight: bold !important;
+  z-index: 99 !important;
+  opacity: 1;
+}
+
+.modal40{
+  width:40% !important;
+}
+/******************/
+/* ESPACIO ENTRE ROWs */
+/******************/
+.margintop_10{
+  margin-top: 10px;
+}
+.margintop_5{
+  margin-top: 5px;
+}
+
+.margintop_30{
+  margin-top: 30px;
+}
+
+/******************/
+/* BOTONES CON LOS HEXA ORIGINALES DE BOOTSTRAP */
+/******************/
+.btn_color_primary{
+  background-color: #428BCA !important;
+  color: #FFFFFF !important;
+}
+.btn_color_danger{
+  background-color: #d9534f !important;
+  color: #FFFFFF !important;
+}
+.btn_color_default{
+  background-color: #eceff1 !important;
+  color: #000000 !important;
+}
+.btn_color_success{
+  background-color: #5cb85c !important;
+  color: #FFF !important;
+}
+
+
+
+/******************/
+/* SELECTs PARA CAPTURA DE DATOS SISAT */
+/******************/
+.select_success{
+  border-width:3px;
+  border-color:#04B431;
+  border-style:solid;
+}
+.select_error{
+  border-width:3px;
+  border-color:#FF4000;
+  border-style:solid;
+}
+
+/* */
+.table_estadisticas th{
+  text-align: center;
+  /*text-transform: uppercase;*/
+  font-weight: bold;
+}
+.table_estadisticas td{
+  text-align: center;
+  text-transform: uppercase;
+  /*font-weight: bold;*/
+}
+.table_estadisticas thead{
+  background-color: #f3f3f3;
+}
+.table_estadisticas tfoot{
+  text-align:right !important;
+  font-style: italic;
+}
+
+.gridp_thead{
+  background-color: #EBEDEF;
+  text-align: center;
+  font-family: '';
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+/* ----------------------- JQuery validate */
+label.error, em.error {  
+	float: none;
+	color: red !important;
+	padding-left: .5em;
+	vertical-align: middle;
+	font-size: 12px !important;
+	font-weight: 500 !important;
+}

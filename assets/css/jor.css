@@ -1,0 +1,98 @@
+
+
+/* jor */
+
+.form-control {
+    width: 100%;
+    display: inline;
+}
+
+.formElementAuto{ 
+    padding: 2px;
+    display: inline-block;    
+    position: relative;    
+    margin:0px;    
+    vertical-align: bottom;    
+}
+
+.no-margin{    
+    margin: 0px;
+}
+
+.rowContainer{    
+    padding-left:5px;
+}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+    border: thin solid lightgray;
+}
+
+#wait {    
+    top: 40%;
+    left: 50%;    
+}
+
+#ok {    
+    top: 40%;
+    left: 50%;    
+}
+  
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+#fotoPropuesta,#fotoOficial,canvas {
+  display: block;
+   max-width:100px;
+   max-height:135px; 
+   /*width: auto;
+   -webkit-filter: grayscale(1); 
+   filter: gray; 
+   filter: grayscale(1); 
+   */
+  
+}
+
+.camcontent{  
+  overflow: hidden;
+  /*width: 100px;*/
+  height: 135px;
+  margin:0 auto;
+}
+  
+#video {
+  display: block;
+  /*max-width:100px;*/
+  max-height:135px;  
+  width: auto;
+  
+}

@@ -1,0 +1,19 @@
+.footer{
+    background-color: #EBEBEB;
+    border-top: solid 1px #b3b3b3;
+}
+
+#p-usuario{
+    float: left;
+    margin-left: 3%;
+}
+
+#p-version{
+    float: right;
+    margin-right: 3%;
+}
+
+.navbar_fotter{
+   margin-bottom: 0px!important 
+}
+

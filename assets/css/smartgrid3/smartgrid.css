@@ -1,0 +1,35 @@
+/* 2017 0912 */
+.scroll{
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.smartgrid_new{
+  border-style: solid;
+  border-width: 2px;
+  border-color: #D8D8D8;
+  border-radius: 2px;
+}
+
+.smartgrid_new thead{
+    background-color: #FAFAFA;
+}
+
+.smartgrid_new th{
+    text-align: center !important;
+}
+
+.smartgrid_new td, #sg-table th{
+    border-left: 1px solid #D8D8D8;
+    border-right: 1px solid #D8D8D8;
+}
+
+.smartgrid_manita{
+    /*text-align: center !important;*/
+    cursor: pointer !important;
+}
+
+.center {
+  align-content: center !important;
+  text-align: center !important;
+}

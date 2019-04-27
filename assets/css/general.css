@@ -1,0 +1,436 @@
+/*stilos grid*/
+.cont_form{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+.sg-panel{
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+.cont_form .navbar {
+    margin-bottom: 5px;
+    min-height: 0;
+}
+.active_colum{
+    background-color: #c9dde1!important;
+}
+.row_buttons{
+    border-top-left-radius:  4px;
+    border-top-right-radius:  4px;
+    background-color: #f9f9f9;
+    padding-left:10px;
+    padding-right: 10px;
+}
+.row_buttons{
+    min-height: 35px;
+}
+.row_buttons_int{
+    clear: both;
+    display: inline-block;
+    width: 100%;
+
+}
+.row_buttons h4{
+    padding-top: 5px;
+    font-weight: normal;
+    color:#000;
+    margin: 0px;
+    float: left;
+
+}
+.grid_list_buttons{
+    float: right;
+}
+
+.grid_sorting{
+/*    border: 0px;
+    display: block;*/
+    background-color: transparent;  
+} 
+.grid_show_hidde{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: grid;
+}
+.grid_fieldset_show_hidde{
+    display: show;
+}
+.grid_control_show_hidde{
+    background-image: url(../images/titulo_grid.png);
+    background-repeat: repeat-x;
+    background-color: #8195AF;
+    width: 100%;
+    color: #fff;
+    float: left;
+    clear: both;
+}
+.grid_button_show_hidde{
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+
+}
+.grid_filtros_app{
+    float: left;
+    margin-left: 10px;
+}
+.grid_cont_action{
+    float: left;
+}
+
+.chk-todos{
+    float: right;
+    margin-right: 15%;
+}
+
+/* Formulario de ingreso al sistema */
+.logo_login{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 15px;
+}
+.logo_login img{
+    width: 100%;
+}
+
+.mensajes_login,
+#panel-login{
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+}
+
+#btn-login{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#imagen_logo
+{
+    width:75px;
+    height:25px;
+}
+.div_row_buttons{
+    width: 100%;
+    float: left;
+    clear: both;
+    vertical-align: top;
+}
+
+.errores-contrasena{
+    color: red;
+}
+
+input[type=text]{
+    text-transform: uppercase;
+    padding: 7px !important;
+}
+
+input[type=email]{
+    text-transform: uppercase;
+}
+
+.no-mayusculas{
+    text-transform: none !important;
+}
+
+/* Para panel de permisos por nivel */
+.col-permisos-nivel{
+    border-right: solid 1px #d3d3d3;
+}
+
+/* Texto y checkbox Todos en central */
+.lbl-todos{
+    text-align: center;
+    border-bottom: solid 1px #d3d3d3;
+}
+
+.no-editable, .select-noeditable{
+    cursor: not-allowed;
+}
+
+.col-permisos-nivel > span{
+    text-align: center;
+}
+
+.div_row_buttons .checkbox{
+    margin-left: 5px;
+    vertical-align: top;
+    margin-top: 0px!important;
+    float: left;
+}
+
+/* Íconos de registros en la tabla de grupos */
+.btn-grupos {
+    display: block;
+}
+.div_row_buttons .checkbox label{
+    vertical-align: top;
+}
+.row_title{
+    text-align: center;
+    background-image: url(../images/titulo_grid.png);
+    background-repeat: repeat-x;
+    background-color: #8195AF;
+    font-size: 16px;
+    color:#FFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+fieldset.default {
+    border: 1px groove #ddd !important;
+    border-radius: 4px;
+
+    padding: 0.7em !important;
+    margin: 0.4em 0.8em !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+    box-shadow:  0px 0px 0px 0px #000;
+}
+
+fieldset.default legend {
+    border: 0px;
+    font-size: 1em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    margin: 0px!important;
+    width: auto!important;
+}
+
+.input-no-padding{
+    padding: 0px !important;
+}
+
+/* Íconos para eliminar grupo */
+.elimina-asig{
+    cursor: pointer;
+}
+
+/* Tabla de asignaturas de primaria */
+.span-elimina{
+    width: 10%;
+    text-align: center;
+}
+.span-numero{
+    width: 5%;
+}
+.tabla-asignaturas{
+    border: solid 1px #ddd;
+}
+#cuerpo-tabla_prim td, #cuerpo-tabla_sec td{
+    border: solid 1px #ddd;
+}
+.txt-detalles{
+    float: right !important;
+    margin-right: 20%;
+}
+
+#rfc, #curp{
+    font-size: .9em;
+    padding: 0px !important;
+}
+/* Color de texto de tooltip*/
+.cumple-req{
+    color: #007400;
+}
+
+/* Mensaje de estado en los formularios de asignaturas */
+#estado{
+    z-index: 10;
+    /*position: fixed;
+    width: 85%;*/
+    opacity: .95 !important;
+    top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#estado-segunda-lengua, #estado-estatal{
+    z-index: 10;
+    opacity: .95 !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#detalles_pree, #detalles_prim, #detalles_sec{
+    display: none;
+}
+
+.grid_item-filtro{
+    float: left;
+    margin-right: 10px;
+}
+.grid_label label{
+    font-weight: normal; 
+}
+.grid_botones_filtros{
+    margin-top: 25px;
+    float: left;
+}
+.grid_botones_filtros button{
+    margin-right: 10px;
+}
+
+.main_container{
+    padding-bottom: 60px;
+}
+
+#genero
+{
+    width: 70px;
+}
+
+
+.flotante-derecha{
+    float:right !important;
+}
+.alertas_link{
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+
+.dropdown-menu{
+    list-style: none;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.dropdown-menu ul{
+    list-style: none;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+
+}
+.dropdown-menu ul li{
+    list-style: none;
+    padding: 5px;
+
+}
+
+.tooltip .tooltip-inner  {
+    background-color: #d9edf7;
+    font-size:11pt;
+    color: black;
+    font:bold;
+    font-weight:bold;
+}
+.tooltip .tooltip-arrow {
+    border-top-color: #d9edf7;
+    font-size:11pt;
+    font:bold;
+    color: black;
+    font-weight:bold;
+
+}
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+/*.sg-table tr td{
+    -ms-word-break: break-all;
+    word-break: break-all;
+
+  Non standard for webkit 
+     word-break: break-word;
+
+    -webkit-hyphens: auto;
+       -moz-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+}*/
+
+/* jor */
+.formElementAuto{ 
+    padding: 2px;
+    display: inline-block;    
+    position: relative;    
+    margin:0px;    
+    vertical-align: bottom;    
+}
+
+.no-margin{    
+    margin: 0px;
+}
+
+.rowContainer{    
+    padding-left:5px;
+}
+
+input { 
+    text-transform: uppercase;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+    border: thin solid lightgray;
+}
+
+#wait {    
+    top: 40%;
+    left: 50%;    
+}
+
+#ok {    
+    top: 40%;
+    left: 50%;    
+}
+  
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+/*
+#fotoPropuesta,#fotoOficial,canvas {
+  display: block;
+   max-width:100px;
+   max-height:135px; 
+   
+  
+}
+
+.camcontent{  
+  overflow: hidden;  
+  height: 135px;
+  margin:0 auto;
+}
+  
+#video {
+  display: block;  
+  max-height:135px;  
+  width: auto;
+  
+}
+*/
