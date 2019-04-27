@@ -195,7 +195,7 @@ EOT;
 			// echo  $_SERVER["HTTP_HOST"].'/yolixtli/assets/img/logoGEP.png'; die();
 			// echo base_url().'/assets/img/logoGEP.png'; die();
 			// $pdf->Image('http://localhost/yolixtli/assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
-			$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
+			$pdf->Image('assets/img/logoGEP.png', 21,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
 
 		$pdf->Output('ruta_de_mejora.pdf', 'I');
 		}// verifica_sesion_redirige
