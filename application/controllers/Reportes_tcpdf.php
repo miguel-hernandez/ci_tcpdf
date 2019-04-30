@@ -171,7 +171,10 @@ EOT;
 				}// verifica_sesion_redirige
 	}// carta_responsiva()
 
-	public function ruta_de_mejora(){
+	public function ruta_de_mejora($idcfg){
+
+		$idcentrocfg=$idcfg;
+		// echo $idcentrocfg;die();
 			$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
 
 			// set document (meta) information
@@ -188,12 +191,75 @@ EOT;
 
 			// set JPEG quality
 			$pdf->setJPEGQuality(75);
-			// echo base_url(); die();
-			// echo base_url().'assets/img/logoGEP.png'; die();
-			// echo  $_SERVER["HTTP_HOST"].'/yolixtli/assets/img/logoGEP.png'; die();
-			// echo base_url().'/assets/img/logoGEP.png'; die();
-			// $pdf->Image('http://localhost/yolixtli/assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
 			$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
+			$array_datos = $this->Reportes_model->get_datos_escuela($idcentrocfg);
+			$array_datos_rutas = $this->Reportes_model->get_rutas($idcentrocfg);
+			// echo "<pre>";print_r($array_datos_rutas);die();
+
+			$pdf->CreateTextBox('CCT: '.$array_datos['cct'], 120, 5, 180, 10, 8, 'B', 'L');
+			$pdf->CreateTextBox('ESCUELA: '.$array_datos['nombre'], 120, 10, 180, 10, 8, 'B', 'L');
+			$pdf->CreateTextBox('CICLO: '.$array_datos['ciclo'].' FECHA: '.date("d/m/Y"), 120,15, 180, 10, 8, 'B', 'L');
+
+$html1="<style>
+table{
+border: 1px solid black;
+padding: 3px;
+text-align: center;
+border-radius: 15px 0 15px 0;}
+
+
+</style>"
+
+;
+			foreach ($array_datos_rutas as $rutas) {
+
+				$orden=$rutas['orden'];
+				// echo $obj;
+				$tema=$rutas['tema'];
+				$indicador=$rutas['indicador'];
+				$objetivo=$rutas['objetivo'];
+				$problematica=$rutas['problematica'];
+				$evidencia=$rutas['evidencia'];
+				$observaciones=$rutas['observaciones'];
+				$observacionessuperv=$rutas['observacionessuperv'];
+				$html1.= <<<EOT
+
+				<table WIDTH="500" align="left" class="main">
+				<tr>
+						<td colspan="1"align="left">Orden: <font size=20> $orden</font></td>
+						<td colspan="1">Tema: $tema</td>
+						<td colspan="1">Indicador APA: $indicador</td>
+				</tr>
+				<tr>
+						<td colspan="3" align="left">Objetivo: $objetivo</td>
+
+				</tr>
+				<tr>
+						<td colspan="3" align="left">Problematica: $problematica</td>
+
+				</tr>
+				<tr>
+						<td colspan="3"align="left">Evidencia: $evidencia</td>
+
+				</tr>
+				<tr>
+						<td colspan="3"align="left">Observaciones: $observaciones</td>
+
+				</tr>
+				<tr>
+						<td colspan="3"align="left">Observaciones supervisor: $observacionessuperv</td>
+
+				</tr>
+
+			</table>
+			<p>
+EOT;
+
+			}
+
+					$pdf->writeHTMLCell(10,0,20,40, $html1, 0, 1, 0, true, '', '');
+
+			$pdf->CreateTextBox('RUTA DE MEJORA', 0,25, 180, 10,16, 'B', 'C');
 
 		$pdf->Output('carta_responsiva.pdf', 'I');
 	}// carta_responsiva()

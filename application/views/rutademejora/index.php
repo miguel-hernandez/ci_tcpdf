@@ -16,6 +16,9 @@
 									</div>
 									<label class="" style="">*Puede modificar el orden de los temas prioritarios arrastrando el registro a la posición deseada.</label>
 								</div>
+
+								<input type="hidden" id="idcentrocfg" value="<?= $idcentrocfg ?>">
+							</input>
 							</div><!-- row -->
               </div>
             </div>

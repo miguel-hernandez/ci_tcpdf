@@ -49,6 +49,7 @@ class Rutademejora extends CI_Controller {
 						"nombre"=>array("type"=>"text", "header"=>"Nombre del programa	","width"=>"65%"),
 						"vigente"=>array("type"=>"icono", "header"=>"Vigente","width"=>"30%")
 					);
+					$data["idcentrocfg"]=$idcentrocfg;
 					$this->idkey = "idprog";
 					$countfe=1;
 					$auxsimbol="<span class='glyphicon glyphicon-ok'></span>";
@@ -61,6 +62,7 @@ class Rutademejora extends CI_Controller {
 					$gridpa->set_configs($this->arr_columnas_grid,$arr_datos,$this->idkey ,"info");
 					$html = $gridpa->get_table();
 					$data["gridpa"]=$html;
+					// echo "<pre>";print_r($data);die();
 					$indicadores = $this->Rutademejora_model->get_indicadores();
 					UtilsWrapper::carga_pagina_basica($this, "rutademejora/index", $data);
 	}// index()
