@@ -58,7 +58,7 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
                       	ctema.descripcion AS tema,
                       	ci.descripcion    AS indicador,
                         rtema.observaciones,
-                        rtema.observacionessuperv,                        
+                        rtema.observacionessuperv,
                         GROUP_CONCAT(crp.descripcion) AS problematicas,
                         GROUP_CONCAT(cre.descripcion) AS evidencias
                       FROM rutam_tema rtema
@@ -71,7 +71,7 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
 		                  INNER JOIN c_rm_evidencia cre ON cre.idevidencia = evi.idevidencia
 
                       WHERE rtema.idcentrocfg = ?
-                      GROUP BY rtema.idrutamtema -- , rtema.orden -- , objetivo -- , tema, indicador
+                      GROUP BY rtema.idrutamtema
                       ORDER BY rtema.orden
     ";
  // echo $q;die();
