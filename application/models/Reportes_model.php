@@ -84,8 +84,8 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
      t1.idactividad,
      t1.descripcion,
      t2.descripcion AS ambito,
-     t1.finicio,
-     t1.ffin,
+     DATE_FORMAT(t1.finicio, '%d/%m/%Y') AS finicio,
+     DATE_FORMAT(t1.ffin, '%d/%m/%Y') AS ffin,
      t1.recursos,
      IF(
        t1.avance = 1,
@@ -110,7 +110,7 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
        ON t1.idambito = t2.idambito
     WHERE t1.idrutamtema = ?;
     ";
-  // echo $q;die();
+  // echo $str_query;die();
     return $this->db->query($str_query, array($idrutamtema))->result_array();
   }
 

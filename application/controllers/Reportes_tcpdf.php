@@ -194,14 +194,14 @@ EOT;
 
 			// set JPEG quality
 			$pdf->setJPEGQuality(75);
-			$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
+			$pdf->Image('assets/img/logoGEP.png', 10,10, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
 			$array_datos = $this->Reportes_model->get_datos_escuela($idcentrocfg);
 			$array_datos_rutas = $this->Reportes_model->get_rutas($idcentrocfg);
 			// echo "<pre>";print_r($array_datos_rutas);die();
 
-			$pdf->CreateTextBox('CCT: '.$array_datos['cct'], 120, 5, 180, 10, 8, 'B', 'L');
-			$pdf->CreateTextBox('ESCUELA: '.$array_datos['nombre'], 120, 10, 180, 10, 8, 'B', 'L');
-			$pdf->CreateTextBox('CICLO: '.$array_datos['ciclo'].' FECHA: '.date("d/m/Y"), 120,15, 180, 10, 8, 'B', 'L');
+			$pdf->CreateTextBox('CCT: '.$array_datos['cct'], 125, 5, 180, 10, 8, 'B', 'L');
+			$pdf->CreateTextBox('ESCUELA: '.$array_datos['nombre'], 125, 10, 180, 10, 8, 'B', 'L');
+			$pdf->CreateTextBox('CICLO: '.$array_datos['ciclo'].' FECHA: '.date("d/m/Y"), 125,15, 180, 10, 8, 'B', 'L');
 
 			$pdf->CreateTextBox('', 120,15, 180, 10, 8, 'N', 'L');
 
@@ -218,7 +218,7 @@ EOT;
 				$observaciones=$rutas['observaciones'];
 				$observacionessuperv=$rutas['observacionessuperv'];
 				$html1.= '<p>
-				<table WIDTH="500" align="left" style="border: 1px solid gray; padding-top:2px; padding-left:4px; padding-right:4px; padding-bottom:5px;">
+				<table WIDTH="540" align="left" style="border: 1px solid gray; padding-top:2px; padding-left:4px; padding-right:4px; padding-bottom:5px;">
 				<thead>
 				<tr>
 						<td colspan="1"><span style="font-weight: bold;">Orden: </span>'.$orden.'</td>
@@ -229,10 +229,10 @@ EOT;
 						<td colspan="3" align="left"><span style="font-weight: bold;">Objetivo: </span>'.$objetivo.'</td>
 				</tr>
 				<tr>
-						<td colspan="3" align="left"><span style="font-weight: bold;">Problematica: </span>'.$problematica.'</td>
+						<td colspan="3" align="left"><span style="font-weight: bold;">Problematica(s): </span>'.$problematica.'</td>
 				</tr>
 				<tr>
-						<td colspan="3"align="left"><span style="font-weight: bold;">Evidencia: </span>'.$evidencia.'</td>
+						<td colspan="3"align="left"><span style="font-weight: bold;">Evidencia(s): </span>'.$evidencia.'</td>
 				</tr>
 				<tr>
 						<td colspan="3"align="left"><span style="font-weight: bold;">Observaciones: </span>'.$observaciones.'</td>
@@ -247,15 +247,15 @@ EOT;
 			$array_actividades = $this->Reportes_model->get_actividades_xidrutatema($rutas['idrutamtema']);
 
 			$html1 .= '
-			<table WIDTH="493" style="padding:2px;">
+			<table WIDTH="532" style="padding:2px;">
 						<tr>
-								<td style="border: 1px solid black; width:4%">No.</td>
-								<td style="border: 1px solid black; width:40% ">Actividad</td>
-								<td style="border: 1px solid black; width:15%">Ámbito</td>
-								<td style="border: 1px solid black; width:10%">F. inicio</td>
-								<td style="border: 1px solid black; width:10%">F. fin</td>
-								<td style="border: 1px solid black; width:14%">Recursos</td>
-								<td style="border: 1px solid black; width:7%">Avance</td>
+								<td style="border: 1px solid black; width:4%" align="center"><span style="font-weight: bold;">No. </span></td>
+								<td style="border: 1px solid black; width:40%" align="center"><span style="font-weight: bold;">Actividad</span></td>
+								<td style="border: 1px solid black; width:15%" align="center"><span style="font-weight: bold;">Ámbito</span></td>
+								<td style="border: 1px solid black; width:10%" align="center"><span style="font-weight: bold;">F. inicio</span></td>
+								<td style="border: 1px solid black; width:10%" align="center"><span style="font-weight: bold;">F. fin</span></td>
+								<td style="border: 1px solid black; width:14%" align="center"><span style="font-weight: bold;">Recursos</span></td>
+								<td style="border: 1px solid black; width:7%" align="center"><span style="font-weight: bold;">Avance</span></td>
 						</tr>
 						';
 
@@ -293,12 +293,12 @@ EOT;
 
 			// die();
 			// echo $html1; die();
-					$pdf->writeHTMLCell(10,0,20,40, $html_final, 0, 1, 0, true, '', '');
+					$pdf->writeHTMLCell(10,0,10,40, $html_final, 0, 1, 0, true, '', '');
 					// $pdf->writeHTMLCell(10,0,20,80, $html2, 0, 1, 0, true, '', '');
 
 			$pdf->CreateTextBox('RUTA DE MEJORA', 0,25, 180, 10,16, 'B', 'C');
 
-		$pdf->Output('carta_responsiva.pdf', 'I');
+		$pdf->Output('ruta_de_mejora.pdf', 'I');
 	}// ruta_de_mejora()
 
 }
