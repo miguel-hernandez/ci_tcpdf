@@ -59,8 +59,8 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
                       	ci.descripcion    AS indicador,
                         rtema.observaciones,
                         rtema.observacionessuperv,
-                        GROUP_CONCAT(crp.descripcion) AS problematicas,
-                        GROUP_CONCAT(cre.descripcion) AS evidencias
+                        GROUP_CONCAT(DISTINCT crp.descripcion SEPARATOR ', ') AS problematicas,
+                        GROUP_CONCAT(DISTINCT cre.descripcion SEPARATOR ', ') AS evidencias
                       FROM rutam_tema rtema
                       INNER JOIN c_rm_tema AS ctema ON ctema.idtema = rtema.idtema
                       INNER JOIN c_rm_indicador ci ON ci.idindicador = rtema.idindicadorAPA
