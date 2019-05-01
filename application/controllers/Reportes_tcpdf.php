@@ -221,24 +221,24 @@ EOT;
 				<table WIDTH="500" align="left" style="border: 1px solid gray; padding-top:2px; padding-left:4px; padding-right:4px; padding-bottom:5px;">
 				<thead>
 				<tr>
-						<td colspan="1"><span style="font-weight: bold;">Orden:</span>'.$orden.'</td>
-						<td colspan="1"><span style="font-weight: bold;">Tema:</span> '.$tema.'</td>
-						<td colspan="1"><span style="font-weight: bold;">Indicador APA</span>: '.$indicador.'</td>
+						<td colspan="1"><span style="font-weight: bold;">Orden: </span>'.$orden.'</td>
+						<td colspan="1"><span style="font-weight: bold;">Tema: </span> '.$tema.'</td>
+						<td colspan="1"><span style="font-weight: bold;">Indicador APA: </span>'.$indicador.'</td>
 				</tr>
 				<tr>
-						<td colspan="3" align="left">Objetivo: '.$objetivo.'</td>
+						<td colspan="3" align="left"><span style="font-weight: bold;">Objetivo: </span>'.$objetivo.'</td>
 				</tr>
 				<tr>
-						<td colspan="3" align="left">Problematica: '.$problematica.'</td>
+						<td colspan="3" align="left"><span style="font-weight: bold;">Problematica: </span>'.$problematica.'</td>
 				</tr>
 				<tr>
-						<td colspan="3"align="left">Evidencia: '.$evidencia.'</td>
+						<td colspan="3"align="left"><span style="font-weight: bold;">Evidencia: </span>'.$evidencia.'</td>
 				</tr>
 				<tr>
-						<td colspan="3"align="left">Observaciones: '.$observaciones.'</td>
+						<td colspan="3"align="left"><span style="font-weight: bold;">Observaciones: </span>'.$observaciones.'</td>
 				</tr>
 				<tr>
-						<td colspan="3"align="left">Observaciones supervisor: '.$observacionessuperv.'</td>
+						<td colspan="3"align="left"><span style="font-weight: bold;">Observaciones supervisor: </span>'.$observacionessuperv.'</td>
 				</tr>
 				</thead><tbody><tr><td colspan="3">
 			';
