@@ -78,5 +78,40 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
     return $this->db->query($str_query, array($idcentrocfg))->result_array();
   }
 
+  function get_actividades_xidrutatema($idrutamtema){
+    $str_query = "   SELECT
+     t1.idrutamtema,
+     t1.idactividad,
+     t1.descripcion,
+     t2.descripcion AS ambito,
+     t1.finicio,
+     t1.ffin,
+     t1.recursos,
+     IF(
+       t1.avance = 1,
+       '0%',
+       IF(
+         t1.avance = 2,
+         '25%',
+         IF(
+           t1.avance = 3,
+           '50%',
+           IF(
+             t1.avance = 4,
+             '75%',
+             IF(t1.avance = 5, '100%', '0')
+           )
+         )
+       )
+     ) AS avance
+    FROM
+     rutam_acts t1
+     INNER JOIN c_rm_ambito t2
+       ON t1.idambito = t2.idambito
+    WHERE t1.idrutamtema = ?;
+    ";
+  // echo $q;die();
+    return $this->db->query($str_query, array($idrutamtema))->result_array();
+  }
 
 }// class Reportes_model

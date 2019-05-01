@@ -171,6 +171,9 @@ EOT;
 				}// verifica_sesion_redirige
 	}// carta_responsiva()
 
+
+
+
 	public function ruta_de_mejora($idcfg){
 
 		$idcentrocfg=$idcfg;
@@ -200,17 +203,9 @@ EOT;
 			$pdf->CreateTextBox('ESCUELA: '.$array_datos['nombre'], 120, 10, 180, 10, 8, 'B', 'L');
 			$pdf->CreateTextBox('CICLO: '.$array_datos['ciclo'].' FECHA: '.date("d/m/Y"), 120,15, 180, 10, 8, 'B', 'L');
 
-$html1="<style>
-table{
-border: 1px solid black;
-padding: 3px;
-text-align: center;
-border-radius: 15px 0 15px 0;}
+			$pdf->CreateTextBox('', 120,15, 180, 10, 8, 'N', 'L');
 
-
-</style>"
-
-;
+			$html1="";
 			foreach ($array_datos_rutas as $rutas) {
 				// echo "<pre>"; print_r($rutas); die();
 				$orden=$rutas['orden'];
@@ -222,90 +217,88 @@ border-radius: 15px 0 15px 0;}
 				$evidencia=$rutas['evidencias'];
 				$observaciones=$rutas['observaciones'];
 				$observacionessuperv=$rutas['observacionessuperv'];
-				$html1.= <<<EOT
-
-				<table WIDTH="500" align="left" class="main">
+				$html1.= '<p>
+				<table WIDTH="500" align="left" style="border: 1px solid gray; padding-top:2px; padding-left:4px; padding-right:4px; padding-bottom:5px;">
+				<thead>
 				<tr>
-						<td colspan="1"align="left">Orden: <font size=20> $orden</font></td>
-						<td colspan="1">Tema: $tema</td>
-						<td colspan="1">Indicador APA: $indicador</td>
+						<td colspan="1"><span style="font-weight: bold;">Orden:</span>'.$orden.'</td>
+						<td colspan="1"><span style="font-weight: bold;">Tema:</span> '.$tema.'</td>
+						<td colspan="1"><span style="font-weight: bold;">Indicador APA</span>: '.$indicador.'</td>
 				</tr>
 				<tr>
-						<td colspan="3" align="left">Objetivo: $objetivo</td>
-
+						<td colspan="3" align="left">Objetivo: '.$objetivo.'</td>
 				</tr>
 				<tr>
-						<td colspan="3" align="left">Problematica: $problematica</td>
-
+						<td colspan="3" align="left">Problematica: '.$problematica.'</td>
 				</tr>
 				<tr>
-						<td colspan="3"align="left">Evidencia: $evidencia</td>
-
+						<td colspan="3"align="left">Evidencia: '.$evidencia.'</td>
 				</tr>
 				<tr>
-						<td colspan="3"align="left">Observaciones: $observaciones</td>
-
+						<td colspan="3"align="left">Observaciones: '.$observaciones.'</td>
 				</tr>
 				<tr>
-						<td colspan="3"align="left">Observaciones supervisor: $observacionessuperv</td>
-
+						<td colspan="3"align="left">Observaciones supervisor: '.$observacionessuperv.'</td>
 				</tr>
-
-			</table>
-			<p>
-EOT;
+				</thead><tbody><tr><td colspan="3">
+			';
 
 			// ACA VAMOS A PINTAR LAS ACTIVIDADES
 			$array_actividades = $this->Reportes_model->get_actividades_xidrutatema($rutas['idrutamtema']);
-			// echo "<pre>"; print_r($array_actividades); die();
-			$html1.= <<<EOT
 
-			<table WIDTH="500" align="left" class="main">
-			<tr>
-					<td colspan="1"align="left">No.</td>
-					<td colspan="1">Actividad</td>
-					<td colspan="1">Ámbito</td>
-			</tr>
-		</table>
-		<p>
+			$html1 .= '
+			<table WIDTH="493" style="padding:2px;">
+						<tr>
+								<td style="border: 1px solid black; width:4%">No.</td>
+								<td style="border: 1px solid black; width:40% ">Actividad</td>
+								<td style="border: 1px solid black; width:15%">Ámbito</td>
+								<td style="border: 1px solid black; width:10%">F. inicio</td>
+								<td style="border: 1px solid black; width:10%">F. fin</td>
+								<td style="border: 1px solid black; width:14%">Recursos</td>
+								<td style="border: 1px solid black; width:7%">Avance</td>
+						</tr>
+						';
+
+
+			$contador = 0;
+			if(count($array_actividades)>0){
+//
+foreach ($array_actividades as $key => $actividad) {
+	$contador ++;
+	$html1.= '
+	<tr>
+			<td colspan="1" style="border: 1px solid black;">'.$contador.'</td>
+			<td colspan="1" style="border: 1px solid black;">'.$actividad['descripcion'].'</td>
+			<td colspan="1" style="border: 1px solid black;">'.$actividad['ambito'].'</td>
+			<td colspan="1" style="border: 1px solid black;">'.$actividad['finicio'].'</td>
+			<td colspan="1" style="border: 1px solid black;">'.$actividad['ffin'].'</td>
+			<td colspan="1" style="border: 1px solid black;">'.$actividad['recursos'].'</td>
+			<td colspan="1" style="border: 1px solid black;">'.$actividad['avance'].'</td>
+	</tr>';
+
+}
+// $html1.="</tr>";
+//
+}else{
+	$html1.= '<tr>
+	<td colspan="7" style="border: 1px solid black;"> Sin actividades </td>
+	</tr>';
+}
+
+$html1.=  '</table></td></tr></tbody></table></p>';
+			}
+			$html_final = <<<EOT
+			$html1
 EOT;
 
-			foreach ($array_actividades as $key => $actividad) {
-				/*
-				echo "<pre>"; print_r($actividad); die();
-				[idrutamtema] => 4
-				[idactividad] => 4
-				[descripcion] => Ponerle gafetes a los niños con figuras cuando entren a la clase
-				[idambito] => Escuela
-				[finicio] => 2019-04-29
-				[ffin] => 2019-07-01
-				[recursos] => figuras de fomi edición 1
-				[avance] => 25%
-				*/
-				$html1.= <<<EOT
-
-				<table WIDTH="500" align="left" class="main">
-				<tr>
-						<td colspan="1"align="left">Orden: <font size=20> $orden</font></td>
-						<td colspan="1">Tema: $tema</td>
-						<td colspan="1">Indicador APA: $indicador</td>
-				</tr>
-
-			</table>
-			<p>
-EOT;
-
-			}
-
-
-			}
-			die();
+			// die();
 			// echo $html1; die();
-					$pdf->writeHTMLCell(10,0,20,40, $html1, 0, 1, 0, true, '', '');
+					$pdf->writeHTMLCell(10,0,20,40, $html_final, 0, 1, 0, true, '', '');
+					// $pdf->writeHTMLCell(10,0,20,80, $html2, 0, 1, 0, true, '', '');
 
 			$pdf->CreateTextBox('RUTA DE MEJORA', 0,25, 180, 10,16, 'B', 'C');
 
 		$pdf->Output('carta_responsiva.pdf', 'I');
-	}// carta_responsiva()
+	}// ruta_de_mejora()
 
 }
