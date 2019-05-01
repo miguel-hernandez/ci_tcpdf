@@ -212,7 +212,7 @@ border-radius: 15px 0 15px 0;}
 
 ;
 			foreach ($array_datos_rutas as $rutas) {
-
+				// echo "<pre>"; print_r($rutas); die();
 				$orden=$rutas['orden'];
 				// echo $obj;
 				$tema=$rutas['tema'];
@@ -255,7 +255,51 @@ border-radius: 15px 0 15px 0;}
 			<p>
 EOT;
 
+			// ACA VAMOS A PINTAR LAS ACTIVIDADES
+			$array_actividades = $this->Reportes_model->get_actividades_xidrutatema($rutas['idrutamtema']);
+			// echo "<pre>"; print_r($array_actividades); die();
+			$html1.= <<<EOT
+
+			<table WIDTH="500" align="left" class="main">
+			<tr>
+					<td colspan="1"align="left">No.</td>
+					<td colspan="1">Actividad</td>
+					<td colspan="1">Ámbito</td>
+			</tr>
+		</table>
+		<p>
+EOT;
+
+			foreach ($array_actividades as $key => $actividad) {
+				/*
+				echo "<pre>"; print_r($actividad); die();
+				[idrutamtema] => 4
+				[idactividad] => 4
+				[descripcion] => Ponerle gafetes a los niños con figuras cuando entren a la clase
+				[idambito] => Escuela
+				[finicio] => 2019-04-29
+				[ffin] => 2019-07-01
+				[recursos] => figuras de fomi edición 1
+				[avance] => 25%
+				*/
+				$html1.= <<<EOT
+
+				<table WIDTH="500" align="left" class="main">
+				<tr>
+						<td colspan="1"align="left">Orden: <font size=20> $orden</font></td>
+						<td colspan="1">Tema: $tema</td>
+						<td colspan="1">Indicador APA: $indicador</td>
+				</tr>
+
+			</table>
+			<p>
+EOT;
+
 			}
+
+
+			}
+			die();
 			// echo $html1; die();
 					$pdf->writeHTMLCell(10,0,20,40, $html1, 0, 1, 0, true, '', '');
 
