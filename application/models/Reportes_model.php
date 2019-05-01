@@ -27,6 +27,7 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
   }
 
   function get_rutas($idcentrocfg){
+    /*
     $q = "SELECT
                      	rtema.idrutamtema,
                      	rtema.orden,
@@ -48,8 +49,33 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
                      GROUP BY cre.descripcion,rtema.idrutamtema,
                      rtema.orden,rtema.objetivo,crp.descripcion,ctema.descripcion,ci.descripcion
                      ORDER BY rtema.orden";
+                     */
+
+    $str_query = " SELECT
+                      	rtema.idrutamtema,
+                      	rtema.orden,
+                      	IFNULL(rtema.objetivo,'') AS objetivo,
+                      	ctema.descripcion AS tema,
+                      	ci.descripcion    AS indicador,
+                        rtema.observaciones,
+                        rtema.observacionessuperv,                        
+                        GROUP_CONCAT(crp.descripcion) AS problematicas,
+                        GROUP_CONCAT(cre.descripcion) AS evidencias
+                      FROM rutam_tema rtema
+                      INNER JOIN c_rm_tema AS ctema ON ctema.idtema = rtema.idtema
+                      INNER JOIN c_rm_indicador ci ON ci.idindicador = rtema.idindicadorAPA
+                      INNER JOIN rutam_problems rtp ON rtp.idrutamtema = rtema.idrutamtema
+                      INNER JOIN c_rm_problem crp ON crp.idproblem = rtp.idproblem
+
+		                  INNER JOIN rutam_evidencia evi ON evi.idrutamtema = rtema.idrutamtema
+		                  INNER JOIN c_rm_evidencia cre ON cre.idevidencia = evi.idevidencia
+
+                      WHERE rtema.idcentrocfg = ?
+                      GROUP BY rtema.idrutamtema -- , rtema.orden -- , objetivo -- , tema, indicador
+                      ORDER BY rtema.orden
+    ";
  // echo $q;die();
-    return $this->db->query($q)->result_array();
+    return $this->db->query($str_query, array($idcentrocfg))->result_array();
   }
 
 

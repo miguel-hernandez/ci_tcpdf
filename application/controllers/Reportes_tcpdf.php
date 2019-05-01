@@ -218,8 +218,8 @@ border-radius: 15px 0 15px 0;}
 				$tema=$rutas['tema'];
 				$indicador=$rutas['indicador'];
 				$objetivo=$rutas['objetivo'];
-				$problematica=$rutas['problematica'];
-				$evidencia=$rutas['evidencia'];
+				$problematica=$rutas['problematicas'];
+				$evidencia=$rutas['evidencias'];
 				$observaciones=$rutas['observaciones'];
 				$observacionessuperv=$rutas['observacionessuperv'];
 				$html1.= <<<EOT
@@ -256,7 +256,7 @@ border-radius: 15px 0 15px 0;}
 EOT;
 
 			}
-
+			// echo $html1; die();
 					$pdf->writeHTMLCell(10,0,20,40, $html1, 0, 1, 0, true, '', '');
 
 			$pdf->CreateTextBox('RUTA DE MEJORA', 0,25, 180, 10,16, 'B', 'C');
