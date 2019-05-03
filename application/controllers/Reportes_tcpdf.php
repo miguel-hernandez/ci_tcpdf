@@ -304,11 +304,9 @@ EOT;
 
 
 
-public function constancia_estudios(){
+public function constancia_estudios($idexpediente){
 	// if (Utilswrapper::verifica_sesion_redirige($this)) {
-
-		$idexpediente = $this->input->post('idexpediente');
-
+		// echo $idexpediente; die();
 		$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
 
 		// set document (meta) information
