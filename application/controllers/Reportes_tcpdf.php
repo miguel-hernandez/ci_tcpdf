@@ -301,4 +301,91 @@ EOT;
 		$pdf->Output('ruta_de_mejora.pdf', 'I');
 	}// ruta_de_mejora()
 
+
+
+
+public function constancia_estudios(){
+	// if (Utilswrapper::verifica_sesion_redirige($this)) {
+
+		$idexpediente = $this->input->post('idexpediente');
+
+		$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+
+		// set document (meta) information
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor('SEP');
+		$pdf->SetTitle('Constancia de estudios');
+		$pdf->SetSubject('');
+		$pdf->SetKeywords('');
+
+		// add a page
+		$pdf->AddPage();
+
+		//imagenes
+
+		// set JPEG quality
+		$pdf->setJPEGQuality(75);
+
+		$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
+
+		// echo $a;die();
+		// título
+		$pdf->CreateTextBox('Escuela:', 0, 10, 180, 10, 8, 'B', 'R');
+		$pdf->CreateTextBox('CCT:', 0, 14, 180, 10, 8, 'B', 'R');
+		$pdf->CreateTextBox('Sección:', 0, 20, 180, 10, 8, 'N', 'R');
+		$pdf->CreateTextBox('Mesa:', 0, 24, 180, 10, 8, 'N', 'R');
+		$pdf->CreateTextBox('ASUNTO: CONSTANCIA DE ESTUDIOS:', 0, 30, 180, 10, 8, 'N', 'R');
+
+		$pdf->Ln(40);
+		$pdf->CreateTextBox('A QUIEN CORRESPONDA:', 0, 36, 180, 10, 12, 'B', 'L');
+
+		$pdf->CreateTextBox('', 0, 36, 180, 10, 12, 'N', 'L');
+
+		$nombre = "XXXXX XXXXX XXXXX";
+		$nia = "12345";
+		$curp = "XXXX######XXXXXX##";
+		$municipio = "NOMBRE DEL MUNICIPIO";
+		$fecha_dias = 0;
+		$fecha_mes = "mes texto";
+		$fecha_anio = 2019;
+		$nivel_educativo  = 'preescolar';
+		$grado = 'GRADO';
+		$grupo = 'GRUPO';
+		$ciclo_escolar_actual = '';
+
+		$html_aux = 'Quien suscribe C. Profr(a). Director(a) de este plantel
+		<h1 style="text-align: center;">HACE CONSTAR</h1>
+		<p style="text-align:justify;">
+		Que el(la) C. '.$nombre.' con NIA -'.$nia.'- y CURP '.$curp.' es Alumno(a) de este plantel educativo y cursa actualmente sus
+estudios de educación '.$nivel_educativo.' en el '.$grado.' grado del grupo '.$grupo.' en el ciclo escolar
+vigente '.$ciclo_escolar_actual.' según documentos que están en el archivo de la misma escuela.
+		</p>
+		<p style="text-align:justify;">
+A petición del(la) interesado(a) y para los fines personales que a el(ella) mejor convenga,
+		</p>
+		<p style="text-align:justify;">
+		Se extiende la presente CONSTANCIA en el municipio de '.$municipio.'
+		a los '.$fecha_dias.' días del mes de '.$fecha_mes.' del año '.$fecha_anio.'.
+		</p>
+		';
+
+$html = <<<EOT
+	$html_aux
+EOT;
+
+		// writeHTMLCell(w, h, x, y, html = '', border = 0, ln = 0, fill = 0, reseth = true, align = '', autopadding = true)
+		$pdf->writeHTMLCell(180,0,25,50, $html, 0, 1, 0, true, '', true);
+
+		$texto7  = "ATENTAMENTE";
+		$pdf->MultiCell($w=0, $h=0, $texto7, $border=0, $align='C', $fill=false, $ln=0, $x='15', $y='160', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0);
+
+		$texto7_2  = "EL(LA) DIRECTOR(A) DEL PLANTEL EDUCATIVO";
+		$pdf->MultiCell($w=0, $h=0, $texto7_2, $border=0, $align='C', $fill=false, $ln=0, $x='15', $y='165', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0);
+
+
+	  //Close and output PDF document
+		$pdf->Output('constancia_estudios.pdf', 'I');
+		// }// verifica_sesion_redirige
+}// constancia_estudios()
+
 }

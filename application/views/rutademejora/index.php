@@ -2,7 +2,10 @@
 								<div class="container">
 
 							<div class="row">
-								<div class="col-xs-11">
+								<div class="col-xs-8">
+								</div>
+								<div class="col-xs-3">
+									<button id="btn_get_reporte_constancia" type="button" data-toggle="tooltip" title="Imprimir" class="btn btn-primary">CONSTANCIA 1</button>
 								</div>
 								<div class="col-xs-1">
 									<button id="btn_get_reporte" type="button" data-toggle="tooltip" title="Imprimir" class="btn btn-primary"><span class="glyphicon glyphicon-print"></span></button>
@@ -48,3 +51,19 @@
 
 <script type="text/javascript" src="<?= base_url("assets/js/utilerias/grid.js") ?>"></script>
 <script type="text/javascript" src="<?= base_url("assets/js/escolar/rutademejora/rutamejora.js") ?>"></script>
+
+<script type="text/javascript">
+$("#btn_get_reporte_constancia").click(function(e){
+   e.preventDefault();
+   	let idexpediente=260234;
+    var form = document.createElement("form");
+    form.name = "form_reporte_constancia";
+    form.id = "form_reporte_constancia";
+    form.method = "POST";
+    form.target = "_blank";
+    form.action = base_url+"Reportes_tcpdf/constancia_estudios/"+idexpediente;
+    document.body.appendChild(form);
+    form.submit();
+ });
+
+</script>
