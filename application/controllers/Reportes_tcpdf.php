@@ -304,11 +304,20 @@ EOT;
 
 
 
-public function constancia_estudios($idex,$idcfg){
+public function constancia_estudios($idex,$idcfg,$niv){
 	// if (Utilswrapper::verifica_sesion_redirige($this)) {
 		// echo $idexpediente; die();
 				$idcentrocfg=$idcfg;
 				$idexpediente=$idex;
+				$nivel=$niv;
+				$nivel_educativo="";
+
+				if ($nivel=="pree")
+				$nivel_educativo="preescolar";
+				elseif($nivel_educativo=="prim")
+				$nivel_educativo="primaria";
+				else
+				$nivel_educativo="secundaria";
 
 		$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
 
@@ -330,7 +339,29 @@ public function constancia_estudios($idex,$idcfg){
 		$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
 
 			$array_datos = $this->Reportes_model->get_datos_escuela($idcentrocfg);
-			$array_datos_exp = $this->Reportes_model->get_expediente($idex);
+			$array_datos_exp = $this->Reportes_model->get_expediente($idexpediente,$nivel);
+
+			function obtenerFechaEnLetra($fecha){
+	    $num = date("j", strtotime($fecha));
+	    $anno = date("Y", strtotime($fecha));
+	    $mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+	    $mes = $mes[(date('m', strtotime($fecha))*1)-1];
+			$text="";
+			$text1="";
+			if($num>1)
+			{
+				$text="a los ";
+				$text1=" días ";
+			}
+			else {
+				$text="al ";
+				$text=" día ";
+			}
+	    return $text.$num.$text1.' del mes de '.$mes.' del año '.$anno;
+			}
+
+
+			$fecha=obtenerFechaEnLetra(date('Y-m-d'));
 
 		// echo $a;die();
 		// título
@@ -368,8 +399,7 @@ vigente '.$ciclo_escolar_actual.' según documentos que están en el archivo de 
 A petición del(la) interesado(a) y para los fines personales que a el(ella) mejor convenga,
 		</p>
 		<p style="text-align:justify;">
-		Se extiende la presente CONSTANCIA en el municipio de '.$municipio.'
-		a los '.$fecha_dias.' días del mes de '.$fecha_mes.' del año '.$fecha_anio.'.
+		Se extiende la presente CONSTANCIA en el municipio de '.$municipio.' '.$fecha.'.
 		</p>
 		';
 

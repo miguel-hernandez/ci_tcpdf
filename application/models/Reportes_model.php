@@ -119,13 +119,22 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
     return $this->db->query($str_query, array($idrutamtema))->result_array();
   }
 
-  function get_expediente($idcentrocfg)
+  function get_expediente($idcentrocfg,$nivel)
   {
-$query="SELECT al.nombre,al.apell1,al.apell2,al.curp,al.idalumno AS NIA,gr.grado,gr.grupo
-FROM expediente_pree ex
+$query="SELECT al.nombre,al.apell1,al.apell2,al.curp,al.idalumno AS NIA,
+CASE WHEN gr.grado = 1 THEN 'primer'
+WHEN gr.grado = 2 THEN 'segundo'
+WHEN gr.grado = 3 THEN 'tercer'
+WHEN gr.grado = 4 THEN 'cuarto'
+WHEN gr.grado = 5 THEN 'quinto'
+WHEN gr.grado = 6 THEN 'sexto'
+END AS grado,gr.grupo
+FROM expediente_{$nivel} ex
 INNER JOIN alumno al ON ex.idalumno=al.idalumno
-INNER JOIN grupo_pree gr ON ex.idgrupo=gr.idgrupo
+INNER JOIN grupo_{$nivel} gr ON ex.idgrupo=gr.idgrupo
 WHERE ex.idexpediente=$idcentrocfg";
+// echo $query;die();
+
     return $this->db->query($query)->row_array();
   }
 

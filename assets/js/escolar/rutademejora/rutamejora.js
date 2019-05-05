@@ -16,12 +16,13 @@ $("#btn_get_reporte").click(function(e){
     e.preventDefault();
       let idexpediente=260234;
       let idcfg=$('#idcentrocfg').val();
+      let nivel="pree";
      var form = document.createElement("form");
      form.name = "form_reporte_constancia";
      form.id = "form_reporte_constancia";
      form.method = "POST";
      form.target = "_blank";
-     form.action = base_url+"Reportes_tcpdf/constancia_estudios/"+idexpediente+"/"+idcfg;
+     form.action = base_url+"Reportes_tcpdf/constancia_estudios/"+idexpediente+"/"+idcfg+"/"+nivel;
      document.body.appendChild(form);
      form.submit();
   });
