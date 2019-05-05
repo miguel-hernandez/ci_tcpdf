@@ -51,19 +51,3 @@
 
 <script type="text/javascript" src="<?= base_url("assets/js/utilerias/grid.js") ?>"></script>
 <script type="text/javascript" src="<?= base_url("assets/js/escolar/rutademejora/rutamejora.js") ?>"></script>
-
-<script type="text/javascript">
-$("#btn_get_reporte_constancia").click(function(e){
-   e.preventDefault();
-   	let idexpediente=260234;
-    var form = document.createElement("form");
-    form.name = "form_reporte_constancia";
-    form.id = "form_reporte_constancia";
-    form.method = "POST";
-    form.target = "_blank";
-    form.action = base_url+"Reportes_tcpdf/constancia_estudios/"+idexpediente;
-    document.body.appendChild(form);
-    form.submit();
- });
-
-</script>

@@ -304,9 +304,12 @@ EOT;
 
 
 
-public function constancia_estudios($idexpediente){
+public function constancia_estudios($idex,$idcfg){
 	// if (Utilswrapper::verifica_sesion_redirige($this)) {
 		// echo $idexpediente; die();
+				$idcentrocfg=$idcfg;
+				$idexpediente=$idex;
+
 		$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
 
 		// set document (meta) information
@@ -326,10 +329,13 @@ public function constancia_estudios($idexpediente){
 
 		$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
 
+			$array_datos = $this->Reportes_model->get_datos_escuela($idcentrocfg);
+			$array_datos_exp = $this->Reportes_model->get_expediente($idex);
+
 		// echo $a;die();
 		// título
-		$pdf->CreateTextBox('Escuela:', 0, 10, 180, 10, 8, 'B', 'R');
-		$pdf->CreateTextBox('CCT:', 0, 14, 180, 10, 8, 'B', 'R');
+		$pdf->CreateTextBox('Escuela: '.$array_datos['nombre'], 0, 10, 180, 10, 8, 'N', 'R');
+		$pdf->CreateTextBox('CCT: '.$array_datos['cct'], 0, 14, 180, 10, 8, 'N', 'R');
 		$pdf->CreateTextBox('Sección:', 0, 20, 180, 10, 8, 'N', 'R');
 		$pdf->CreateTextBox('Mesa:', 0, 24, 180, 10, 8, 'N', 'R');
 		$pdf->CreateTextBox('ASUNTO: CONSTANCIA DE ESTUDIOS:', 0, 30, 180, 10, 8, 'N', 'R');
@@ -339,16 +345,16 @@ public function constancia_estudios($idexpediente){
 
 		$pdf->CreateTextBox('', 0, 36, 180, 10, 12, 'N', 'L');
 
-		$nombre = "XXXXX XXXXX XXXXX";
-		$nia = "12345";
-		$curp = "XXXX######XXXXXX##";
-		$municipio = "NOMBRE DEL MUNICIPIO";
+		$nombre = $array_datos_exp['apell1'].' '.$array_datos_exp['apell2'].' '.$array_datos_exp['nombre'];
+		$nia = $array_datos_exp['NIA'];
+		$curp = $array_datos_exp['curp'];
+		$municipio = $array_datos['municipio'].', '.$array_datos['entidad'];
 		$fecha_dias = 0;
 		$fecha_mes = "mes texto";
 		$fecha_anio = 2019;
 		$nivel_educativo  = 'preescolar';
-		$grado = 'GRADO';
-		$grupo = 'GRUPO';
+		$grado = $array_datos_exp['grado'];
+		$grupo = $array_datos_exp['grupo'];
 		$ciclo_escolar_actual = '';
 
 		$html_aux = 'Quien suscribe C. Profr(a). Director(a) de este plantel

@@ -18,9 +18,14 @@ class Reportes_model extends CI_Model {
   }// get()
 
   function get_datos_escuela($idcentrocfg){
-    $q = "SELECT ct.cct,ct.nombre,'2018-1019' AS ciclo
-FROM centrocfg cfg
-INNER JOIN cct ct ON cfg.idct=ct.idct
+    $q = "SELECT
+ct.*,m.nombre AS municipio,e.nombre AS entidad,
+  '2018-1019' AS ciclo
+FROM
+  centrocfg cfg
+  INNER JOIN cct ct ON cfg.idct = ct.idct
+  INNER JOIN municipio m ON m.idmunicipio=ct.idmunicipio AND m.identidad=ct.identidad
+  INNER JOIN entidad e ON e.identidad=ct.identidad
 WHERE cfg.idcentrocfg= $idcentrocfg";
  // echo $q;die();
     return $this->db->query($q)->row_array();
@@ -112,6 +117,16 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
     ";
   // echo $str_query;die();
     return $this->db->query($str_query, array($idrutamtema))->result_array();
+  }
+
+  function get_expediente($idcentrocfg)
+  {
+$query="SELECT al.nombre,al.apell1,al.apell2,al.curp,al.idalumno AS NIA,gr.grado,gr.grupo
+FROM expediente_pree ex
+INNER JOIN alumno al ON ex.idalumno=al.idalumno
+INNER JOIN grupo_pree gr ON ex.idgrupo=gr.idgrupo
+WHERE ex.idexpediente=$idcentrocfg";
+    return $this->db->query($query)->row_array();
   }
 
 }// class Reportes_model
