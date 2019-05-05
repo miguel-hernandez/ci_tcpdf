@@ -355,7 +355,7 @@ public function constancia_estudios($idex,$idcfg,$niv){
 			}
 			else {
 				$text="al ";
-				$text=" día ";
+				$text1=" día ";
 			}
 	    return $text.$num.$text1.' del mes de '.$mes.' del año '.$anno;
 			}
@@ -380,10 +380,6 @@ public function constancia_estudios($idex,$idcfg,$niv){
 		$nia = $array_datos_exp['NIA'];
 		$curp = $array_datos_exp['curp'];
 		$municipio = $array_datos['municipio'].', '.$array_datos['entidad'];
-		$fecha_dias = 0;
-		$fecha_mes = "mes texto";
-		$fecha_anio = 2019;
-		$nivel_educativo  = 'preescolar';
 		$grado = $array_datos_exp['grado'];
 		$grupo = $array_datos_exp['grupo'];
 		$ciclo_escolar_actual = '';
