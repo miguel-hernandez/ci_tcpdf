@@ -303,118 +303,139 @@ EOT;
 
 
 
+	private function obtenerFechaEnLetra2($fecha){
+	$num = date("j", strtotime($fecha));
+	$anno = date("Y", strtotime($fecha));
+	$mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+	$mes = $mes[(date('m', strtotime($fecha))*1)-1];
+	$text="";
+	$text1="";
+	if($num>1)
+	{
+		$text="a los ";
+		$text1=" días ";
+	}
+	else {
+		$text="al ";
+		$text1=" día ";
+	}
+	return $text.$num.$text1.' del mes de '.$mes.' del año '.$anno;
+	}
+
+private function genera_constancias($pdf, $nivel, $idcentrocfg, $idexpediente){
+	if ($nivel=="pree")
+	$nivel_educativo="preescolar";
+	elseif($nivel_educativo=="prim")
+	$nivel_educativo="primaria";
+	else
+	$nivel_educativo="secundaria";
+/*
+$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+
+// set document (meta) information
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetAuthor('SEP');
+$pdf->SetTitle('Constancia de estudios');
+$pdf->SetSubject('');
+$pdf->SetKeywords('');
+*/
+// add a page
+$pdf->AddPage();
+
+//imagenes
+
+// set JPEG quality
+$pdf->setJPEGQuality(75);
+
+$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
+
+$array_datos = $this->Reportes_model->get_datos_escuela($idcentrocfg);
+$array_datos_exp = $this->Reportes_model->get_expediente($idexpediente,$nivel);
+
+
+$fecha=$this->obtenerFechaEnLetra2(date('Y-m-d'));
+
+// echo $a;die();
+// título
+$pdf->CreateTextBox('Escuela: '.$array_datos['nombre'], 0, 10, 180, 10, 8, 'N', 'R');
+$pdf->CreateTextBox('CCT: '.$array_datos['cct'], 0, 14, 180, 10, 8, 'N', 'R');
+$pdf->CreateTextBox('Sección:', 0, 20, 180, 10, 8, 'N', 'R');
+$pdf->CreateTextBox('Mesa:', 0, 24, 180, 10, 8, 'N', 'R');
+$pdf->CreateTextBox('ASUNTO: CONSTANCIA DE ESTUDIOS:', 0, 30, 180, 10, 8, 'N', 'R');
+
+$pdf->Ln(40);
+$pdf->CreateTextBox('A QUIEN CORRESPONDA:', 0, 36, 180, 10, 12, 'B', 'L');
+
+$pdf->CreateTextBox('', 0, 36, 180, 10, 12, 'N', 'L');
+
+$nombre = $array_datos_exp['apell1'].' '.$array_datos_exp['apell2'].' '.$array_datos_exp['nombre'];
+$nia = $array_datos_exp['NIA'];
+$curp = $array_datos_exp['curp'];
+$municipio = $array_datos['municipio'].', '.$array_datos['entidad'];
+$grado = $array_datos_exp['grado'];
+$grupo = $array_datos_exp['grupo'];
+$ciclo_escolar_actual = '';
+
+$html_aux = 'Quien suscribe C. Profr(a). Director(a) de este plantel
+<h1 style="text-align: center;">HACE CONSTAR</h1>
+<p style="text-align:justify;">
+Que el(la) C. '.$nombre.' con NIA -'.$nia.'- y CURP '.$curp.' es Alumno(a) de este plantel educativo y cursa actualmente sus
+estudios de educación '.$nivel_educativo.' en el '.$grado.' grado del grupo '.$grupo.' en el ciclo escolar
+vigente '.$ciclo_escolar_actual.' según documentos que están en el archivo de la misma escuela.
+</p>
+<p style="text-align:justify;">
+A petición del(la) interesado(a) y para los fines personales que a el(ella) mejor convenga,
+</p>
+<p style="text-align:justify;">
+Se extiende la presente CONSTANCIA en el municipio de '.$municipio.' '.$fecha.'.
+</p>
+';
+
+$html = <<<EOT
+$html_aux
+EOT;
+
+// writeHTMLCell(w, h, x, y, html = '', border = 0, ln = 0, fill = 0, reseth = true, align = '', autopadding = true)
+$pdf->writeHTMLCell(170,0,20,50, $html, 0, 1, 0, true, '', true);
+
+$texto7  = "ATENTAMENTE";
+$pdf->MultiCell($w=0, $h=0, $texto7, $border=0, $align='C', $fill=false, $ln=0, $x='15', $y='160', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0);
+
+$texto7_2  = "EL(LA) DIRECTOR(A) DEL PLANTEL EDUCATIVO";
+$pdf->MultiCell($w=0, $h=0, $texto7_2, $border=0, $align='C', $fill=false, $ln=0, $x='15', $y='165', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0);
+
+return $pdf;
+}// genera_constancias()
 
 public function constancia_estudios($idex,$idcfg,$niv){
 	// if (Utilswrapper::verifica_sesion_redirige($this)) {
+	// echo "<pre>"; print_r($_POST); die();
 		// echo $idexpediente; die();
+			$idexpediente_aux = $this->input->post('idexpedientes');
+			// $idexpedientes = $_POST['idexpedientes'];
 				$idcentrocfg=$idcfg;
-				$idexpediente=$idex;
+				// $idexpediente=$idex;
+				// $idexpediente_aux=$idex.',260234, 260234';
+				$porciones = explode(",", $idexpediente_aux);
+
 				$nivel=$niv;
 				$nivel_educativo="";
 
-				if ($nivel=="pree")
-				$nivel_educativo="preescolar";
-				elseif($nivel_educativo=="prim")
-				$nivel_educativo="primaria";
-				else
-				$nivel_educativo="secundaria";
+			  $pdf_obj = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+				// set document (meta) information
+				$pdf_obj->SetCreator(PDF_CREATOR);
+				$pdf_obj->SetAuthor('SEP');
+				$pdf_obj->SetTitle('Constancia de estudios');
+				$pdf_obj->SetSubject('');
+				$pdf_obj->SetKeywords('');
 
-		$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
-
-		// set document (meta) information
-		$pdf->SetCreator(PDF_CREATOR);
-		$pdf->SetAuthor('SEP');
-		$pdf->SetTitle('Constancia de estudios');
-		$pdf->SetSubject('');
-		$pdf->SetKeywords('');
-
-		// add a page
-		$pdf->AddPage();
-
-		//imagenes
-
-		// set JPEG quality
-		$pdf->setJPEGQuality(75);
-
-		$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
-
-			$array_datos = $this->Reportes_model->get_datos_escuela($idcentrocfg);
-			$array_datos_exp = $this->Reportes_model->get_expediente($idexpediente,$nivel);
-
-			function obtenerFechaEnLetra($fecha){
-	    $num = date("j", strtotime($fecha));
-	    $anno = date("Y", strtotime($fecha));
-	    $mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
-	    $mes = $mes[(date('m', strtotime($fecha))*1)-1];
-			$text="";
-			$text1="";
-			if($num>1)
-			{
-				$text="a los ";
-				$text1=" días ";
-			}
-			else {
-				$text="al ";
-				$text1=" día ";
-			}
-	    return $text.$num.$text1.' del mes de '.$mes.' del año '.$anno;
-			}
-
-
-			$fecha=obtenerFechaEnLetra(date('Y-m-d'));
-
-		// echo $a;die();
-		// título
-		$pdf->CreateTextBox('Escuela: '.$array_datos['nombre'], 0, 10, 180, 10, 8, 'N', 'R');
-		$pdf->CreateTextBox('CCT: '.$array_datos['cct'], 0, 14, 180, 10, 8, 'N', 'R');
-		$pdf->CreateTextBox('Sección:', 0, 20, 180, 10, 8, 'N', 'R');
-		$pdf->CreateTextBox('Mesa:', 0, 24, 180, 10, 8, 'N', 'R');
-		$pdf->CreateTextBox('ASUNTO: CONSTANCIA DE ESTUDIOS:', 0, 30, 180, 10, 8, 'N', 'R');
-
-		$pdf->Ln(40);
-		$pdf->CreateTextBox('A QUIEN CORRESPONDA:', 0, 36, 180, 10, 12, 'B', 'L');
-
-		$pdf->CreateTextBox('', 0, 36, 180, 10, 12, 'N', 'L');
-
-		$nombre = $array_datos_exp['apell1'].' '.$array_datos_exp['apell2'].' '.$array_datos_exp['nombre'];
-		$nia = $array_datos_exp['NIA'];
-		$curp = $array_datos_exp['curp'];
-		$municipio = $array_datos['municipio'].', '.$array_datos['entidad'];
-		$grado = $array_datos_exp['grado'];
-		$grupo = $array_datos_exp['grupo'];
-		$ciclo_escolar_actual = '';
-
-		$html_aux = 'Quien suscribe C. Profr(a). Director(a) de este plantel
-		<h1 style="text-align: center;">HACE CONSTAR</h1>
-		<p style="text-align:justify;">
-		Que el(la) C. '.$nombre.' con NIA -'.$nia.'- y CURP '.$curp.' es Alumno(a) de este plantel educativo y cursa actualmente sus
-estudios de educación '.$nivel_educativo.' en el '.$grado.' grado del grupo '.$grupo.' en el ciclo escolar
-vigente '.$ciclo_escolar_actual.' según documentos que están en el archivo de la misma escuela.
-		</p>
-		<p style="text-align:justify;">
-A petición del(la) interesado(a) y para los fines personales que a el(ella) mejor convenga,
-		</p>
-		<p style="text-align:justify;">
-		Se extiende la presente CONSTANCIA en el municipio de '.$municipio.' '.$fecha.'.
-		</p>
-		';
-
-$html = <<<EOT
-	$html_aux
-EOT;
-
-		// writeHTMLCell(w, h, x, y, html = '', border = 0, ln = 0, fill = 0, reseth = true, align = '', autopadding = true)
-		$pdf->writeHTMLCell(180,0,25,50, $html, 0, 1, 0, true, '', true);
-
-		$texto7  = "ATENTAMENTE";
-		$pdf->MultiCell($w=0, $h=0, $texto7, $border=0, $align='C', $fill=false, $ln=0, $x='15', $y='160', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0);
-
-		$texto7_2  = "EL(LA) DIRECTOR(A) DEL PLANTEL EDUCATIVO";
-		$pdf->MultiCell($w=0, $h=0, $texto7_2, $border=0, $align='C', $fill=false, $ln=0, $x='15', $y='165', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0);
-
+				foreach ($porciones as $key => $porcion) {
+					// echo "<pre>"; print_r($porcion); die();
+					$pdf_obj = $this->genera_constancias($pdf_obj, $nivel, $idcentrocfg, trim($porcion));
+				}
 
 	  //Close and output PDF document
-		$pdf->Output('constancia_estudios.pdf', 'I');
+		$pdf_obj->Output('constancia_estudios.pdf', 'I');
 		// }// verifica_sesion_redirige
 }// constancia_estudios()
 
