@@ -203,6 +203,7 @@ EOT;
 			$pdf->CreateTextBox('ESCUELA: '.$array_datos['nombre'], 125, 10, 180, 10, 8, 'B', 'L');
 			$pdf->CreateTextBox('CICLO: '.$array_datos['ciclo'].' FECHA: '.date("d/m/Y"), 125,15, 180, 10, 8, 'B', 'L');
 
+			$pdf->CreateTextBox('RUTA DE MEJORA', 0,25, 180, 10,16, 'B', 'C');
 			$pdf->CreateTextBox('', 120,15, 180, 10, 8, 'N', 'L');
 
 			$html1="";
@@ -296,7 +297,7 @@ EOT;
 					$pdf->writeHTMLCell(10,0,10,40, $html_final, 0, 1, 0, true, '', '');
 					// $pdf->writeHTMLCell(10,0,20,80, $html2, 0, 1, 0, true, '', '');
 
-			$pdf->CreateTextBox('RUTA DE MEJORA', 0,25, 180, 10,16, 'B', 'C');
+
 
 		$pdf->Output('ruta_de_mejora.pdf', 'I');
 	}// ruta_de_mejora()
