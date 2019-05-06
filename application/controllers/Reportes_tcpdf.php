@@ -178,7 +178,7 @@ EOT;
 
 		$idcentrocfg=$idcfg;
 		// echo $idcentrocfg;die();
-			$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+			$pdf = new My_tcpdf_page('P', 'mm', 'A4', true, 'UTF-8', false);
 
 			// set document (meta) information
 			$pdf->SetCreator(PDF_CREATOR);

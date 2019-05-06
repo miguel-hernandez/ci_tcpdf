@@ -29,7 +29,7 @@ FROM
 WHERE cfg.idcentrocfg= $idcentrocfg";
  // echo $q;die();
     return $this->db->query($q)->row_array();
-  }
+  } //get_datos_escuela()
 
   function get_rutas($idcentrocfg){
     /*
@@ -81,7 +81,7 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
     ";
  // echo $q;die();
     return $this->db->query($str_query, array($idcentrocfg))->result_array();
-  }
+  } //get_rutas
 
   function get_actividades_xidrutatema($idrutamtema){
     $str_query = "   SELECT
@@ -117,7 +117,7 @@ WHERE cfg.idcentrocfg= $idcentrocfg";
     ";
   // echo $str_query;die();
     return $this->db->query($str_query, array($idrutamtema))->result_array();
-  }
+  } //get_actividades_xidrutatema()
 
   function get_expediente($idcentrocfg,$nivel)
   {
@@ -136,6 +136,6 @@ WHERE ex.idexpediente=$idcentrocfg";
 // echo $query;die();
 
     return $this->db->query($query)->row_array();
-  }
+  }//get_expediente()
 
 }// class Reportes_model
