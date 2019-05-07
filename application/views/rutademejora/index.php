@@ -2,7 +2,10 @@
 								<div class="container">
 
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-xs-6">
+								</div>
+								<div class="col-xs-2">
+									<a href="<?= base_url('Reportes_tcpdf/carta_responsiva/4238') ?>" target="_blank" class="btn btn-primary">Carta responsiva 4238</a>
 								</div>
 								<div class="col-xs-3">
 									<button id="btn_get_reporte_constancia" type="button" data-toggle="tooltip" title="Imprimir" class="btn btn-primary">CONSTANCIA 1</button>

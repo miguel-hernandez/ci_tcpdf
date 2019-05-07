@@ -41,4 +41,15 @@
       	}// verifica_sesion_redirige_ajax()
     }
 
+    if(!function_exists('get_nombre_mes')){
+        function get_nombre_mes($date) { // '2019-01-01'
+          setlocale(LC_TIME, 'spanish');
+
+          $array_fecha = explode('-', $date);
+          $mes = $array_fecha[1];
+     		  $nombre = strftime("%B",mktime(0, 0, 0, $mes, 1, 2000));
+     		  return trim($nombre);
+      	}// get_nombre_mes()
+    }
+
 ?>

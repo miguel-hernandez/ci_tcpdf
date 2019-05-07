@@ -9,6 +9,7 @@ function __construct()
 		$this->load->helper('url');
 		$this->load->library('My_tcpdf');
 		$this->load->library('UtilsWrapper');
+		$this->load->helper('appweb');
 
 		$this->load->model('Reportes_model');
 	}// __construct()
@@ -32,32 +33,20 @@ function __construct()
 		// add a page
 		$pdf->AddPage();
 
-		//imagenes
-
 		// set JPEG quality
 		$pdf->setJPEGQuality(75);
-		// echo base_url(); die();
-		// echo base_url().'assets/img/logoGEP.png'; die();
-		// echo  $_SERVER["HTTP_HOST"].'/yolixtli/assets/img/logoGEP.png'; die();
-		// echo base_url().'/assets/img/logoGEP.png'; die();
-		// $pdf->Image('http://localhost/yolixtli/assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
+				//imagenes
 		$pdf->Image('assets/img/logoGEP.png', 20,5, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
 
-		function obtenerFechaEnLetra($fecha){
-    $num = date("j", strtotime($fecha));
-    $anno = date("Y", strtotime($fecha));
-    $mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
-    $mes = $mes[(date('m', strtotime($fecha))*1)-1];
-    return $num.' de '.$mes.' de '.$anno;
-		}
+		$fecha_hoy = date("Y-m-d");
+		$array_aux = explode("-", $fecha_hoy);
+		$mes = get_nombre_mes($fecha_hoy); // helper
+		$dia = $array_aux[2];
+		$anio = $array_aux[0];
 
-
-		$fecha=obtenerFechaEnLetra(date('Y-m-d'));
-		// echo $a;die();
-		// título
 		$pdf->CreateTextBox('OFICIO:', 0, 10, 180, 10, 8, 'B', 'R');
 		$pdf->CreateTextBox('ASUNTO: Responsiva', 0, 14, 180, 10, 8, 'B', 'R');
-		$pdf->CreateTextBox('"Cuatro veces Heroica Puebla de Zaragoza", a '.$fecha, 0, 20, 180, 10, 8, 'N', 'R');
+		$pdf->CreateTextBox('"Cuatro veces Heroica Puebla de Zaragoza", a '.$dia.' de '.$mes.' de '.$anio, 0, 20, 180, 10, 8, 'N', 'R');
 
 		$pdf->Ln(40);
 		$pdf->CreateTextBox('C. '.$director, 0, 30, 180, 10, 8, 'B', 'L');
@@ -68,8 +57,6 @@ function __construct()
 
 
 		$palabra = "https://yolixtli.gob.mx";
-
-
 
 		$array_datos = $this->Reportes_model->carta_responsiva($idusuario);
 		// echo "<pre>"; print_r($array_datos); die();
@@ -85,7 +72,7 @@ function __construct()
 		// $pdf->Ln(20);
 
 
-	$html= <<<EOT
+	$tabla = '
 	<style>
 table, th, td {
   border: 1px solid black;
@@ -94,29 +81,18 @@ table, th, td {
 }
 </style>
 	<table>
+	  <tr> <th>USUARIO</th><th>CLAVE DE ACCESO</th></tr>
 	  <tr>
-	    <th>USUARIO</th>
-	    <th>CLAVE DE ACCESO</th>
-	  </tr>
-	  <tr>
-		<td>
+		<td>'.$array_datos['username'].'</td>
+		<td>'.$array_datos['clave'].'</td>
+		</tr>
+		</table>
+	';
+
+$html = <<<EOT
+	$tabla
 EOT;
 
-$html.= $array_datos['username'];
-
-$html.= <<<EOT
-</td>
-<td>
-EOT;
-
-
-$html.= $array_datos['clave'];
-
-$html.= <<<EOT
-</td>
-</tr>
-</table>
-EOT;
 // $pdf->writeHTMLCell(80, '', '', '', $html, 1, 1, 1, true, 'J', true);
 		  $pdf->writeHTMLCell(80,10,63,67, $html, 0, 1, 0, true, '', true);
 
@@ -168,7 +144,7 @@ EOT;
 
 		//Close and output PDF document
 		$pdf->Output('carta_responsiva.pdf', 'I');
-				}// verifica_sesion_redirige
+			}// verifica_sesion_redirige
 	}// carta_responsiva()
 
 
@@ -304,42 +280,17 @@ EOT;
 
 
 
-	private function obtenerFechaEnLetra2($fecha){
-	$num = date("j", strtotime($fecha));
-	$anno = date("Y", strtotime($fecha));
-	$mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
-	$mes = $mes[(date('m', strtotime($fecha))*1)-1];
-	$text="";
-	$text1="";
-	if($num>1)
-	{
-		$text="a los ";
-		$text1=" días ";
-	}
-	else {
-		$text="al ";
-		$text1=" día ";
-	}
-	return $text.$num.$text1.' del mes de '.$mes.' del año '.$anno;
-	}
-
 private function genera_constancias($pdf, $nivel, $idcentrocfg, $idexpediente){
-	if ($nivel=="pree")
-	$nivel_educativo="preescolar";
-	elseif($nivel_educativo=="prim")
-	$nivel_educativo="primaria";
-	else
-	$nivel_educativo="secundaria";
-/*
-$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+	if ($nivel=="pree"){
+			$nivel_educativo="preescolar";
+	}
+	elseif($nivel_educativo=="prim"){
+			$nivel_educativo="primaria";
+	}
+	else{
+			$nivel_educativo="secundaria";
+	}
 
-// set document (meta) information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('SEP');
-$pdf->SetTitle('Constancia de estudios');
-$pdf->SetSubject('');
-$pdf->SetKeywords('');
-*/
 // add a page
 $pdf->AddPage();
 
@@ -354,8 +305,14 @@ $array_datos = $this->Reportes_model->get_datos_escuela($idcentrocfg);
 $array_datos_exp = $this->Reportes_model->get_expediente($idexpediente,$nivel);
 
 
-$fecha=$this->obtenerFechaEnLetra2(date('Y-m-d'));
-
+// $fecha=$this->obtenerFechaEnLetra2(date('Y-m-d'));
+$fecha_hoy = date("Y-m-d");
+$array_aux = explode("-", $fecha_hoy);
+$mes = get_nombre_mes($fecha_hoy); // helper
+$dia = $array_aux[2];
+$anio = $array_aux[0];
+$fecha = 'a los '.$dia.' días del mes de '.$mes.' del año '.$anio;
+// a los X días del mes de Y del año Z
 // echo $a;die();
 // título
 $pdf->CreateTextBox('Escuela: '.$array_datos['nombre'], 0, 10, 180, 10, 8, 'N', 'R');
@@ -410,8 +367,7 @@ return $pdf;
 
 public function constancia_estudios($idex,$idcfg,$niv){
 	// if (Utilswrapper::verifica_sesion_redirige($this)) {
-	// echo "<pre>"; print_r($_POST); die();
-		// echo $idexpediente; die();
+
 			$idexpediente_aux = $this->input->post('idexpedientes');
 			// $idexpedientes = $_POST['idexpedientes'];
 				$idcentrocfg=$idcfg;
@@ -435,9 +391,43 @@ public function constancia_estudios($idex,$idcfg,$niv){
 					$pdf_obj = $this->genera_constancias($pdf_obj, $nivel, $idcentrocfg, trim($porcion));
 				}
 
-	  //Close and output PDF document
-		$pdf_obj->Output('constancia_estudios.pdf', 'I');
+	  	//Close and output PDF document
+			$pdf_obj->Output('constancia_estudios.pdf', 'I');
 		// }// verifica_sesion_redirige
 }// constancia_estudios()
 
+}// class
+
+
+
+/* carta responsiva
+function obtenerFechaEnLetra($fecha){
+$num = date("j", strtotime($fecha));
+$anno = date("Y", strtotime($fecha));
+$mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+$mes = $mes[(date('m', strtotime($fecha))*1)-1];
+return $num.' de '.$mes.' de '.$anno;
 }
+*/
+
+/* constancia
+private function obtenerFechaEnLetra2($fecha){
+$num = date("j", strtotime($fecha));
+$anno = date("Y", strtotime($fecha));
+$mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+$mes = $mes[(date('m', strtotime($fecha))*1)-1];
+$text="";
+$text1="";
+if($num>1)
+{
+	$text="a los ";
+	$text1=" días ";
+}
+else {
+	$text="al ";
+	$text1=" día ";
+}
+return $text.$num.$text1.' del mes de '.$mes.' del año '.$anno;
+// a los X días del mes de Y del año Z
+}
+*/
