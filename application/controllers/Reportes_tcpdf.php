@@ -309,9 +309,13 @@ $array_datos_exp = $this->Reportes_model->get_expediente($idexpediente,$nivel);
 $fecha_hoy = date("Y-m-d");
 $array_aux = explode("-", $fecha_hoy);
 $mes = get_nombre_mes($fecha_hoy); // helper
-$dia = $array_aux[2];
+$dia = (int)$array_aux[2];
+// $dia = 1;
 $anio = $array_aux[0];
-$fecha = 'a los '.$dia.' días del mes de '.$mes.' del año '.$anio;
+// $fecha = 'a los '.$dia.' días del mes de '.$mes.' del año '.$anio;
+$fecha = (((int)$dia>1)?'a los ':'al ').$dia.(((int)$dia>1)?' días del mes de ':' día del mes de ').$mes.' del año '.$anio;
+
+// echo $fecha;die();
 // a los X días del mes de Y del año Z
 // echo $a;die();
 // título
