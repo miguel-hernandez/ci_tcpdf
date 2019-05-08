@@ -22,6 +22,8 @@ function __construct()
 		$director = mb_strtoupper($this->input->post('director'));
 
 		$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+		// $pdf = new My_tcpdf_page('P', 'mm', 'A4', true, 'UTF-8', false);
+
 
 		// set document (meta) information
 		$pdf->SetCreator(PDF_CREATOR);
@@ -151,11 +153,16 @@ EOT;
 
 
 	public function ruta_de_mejora($idcfg){
+		if (Utilswrapper::verifica_sesion_redirige($this)) {
 
 		$idcentrocfg=$idcfg;
 		// echo $idcentrocfg;die();
-			$pdf = new My_tcpdf_page('P', 'mm', 'A4', true, 'UTF-8', false);
 
+			// $pdf = new My_tcpdf_page('P', 'mm', 'A4', true, 'UTF-8', false);
+			$pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+			$pdf->flag_no_pagina = TRUE;
+
+			// echo "<pre>"; print_r($pdf); die();
 			// set document (meta) information
 			$pdf->SetCreator(PDF_CREATOR);
 			$pdf->SetAuthor('SEP');
@@ -276,6 +283,7 @@ EOT;
 
 
 		$pdf->Output('ruta_de_mejora.pdf', 'I');
+		}// verifica_sesion_redirige
 	}// ruta_de_mejora()
 
 
@@ -366,7 +374,7 @@ return $pdf;
 }// genera_constancias()
 
 public function constancia_estudios($idex,$idcfg,$niv){
-	// if (Utilswrapper::verifica_sesion_redirige($this)) {
+	if (Utilswrapper::verifica_sesion_redirige($this)) {
 
 			$idexpediente_aux = $this->input->post('idexpedientes');
 			// $idexpedientes = $_POST['idexpedientes'];
@@ -379,6 +387,7 @@ public function constancia_estudios($idex,$idcfg,$niv){
 				$nivel_educativo="";
 
 			  $pdf_obj = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+
 				// set document (meta) information
 				$pdf_obj->SetCreator(PDF_CREATOR);
 				$pdf_obj->SetAuthor('SEP');
@@ -393,7 +402,7 @@ public function constancia_estudios($idex,$idcfg,$niv){
 
 	  	//Close and output PDF document
 			$pdf_obj->Output('constancia_estudios.pdf', 'I');
-		// }// verifica_sesion_redirige
+		}// verifica_sesion_redirige
 }// constancia_estudios()
 
 }// class
