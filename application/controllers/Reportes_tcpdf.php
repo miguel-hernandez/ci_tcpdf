@@ -409,6 +409,87 @@ public function constancia_estudios($idex,$idcfg,$niv){
 		}// verifica_sesion_redirige
 }// constancia_estudios()
 
+public function lista_asistencia($idex,$idcfg,$niv){
+	if (Utilswrapper::verifica_sesion_redirige($this)) {
+
+			$idexpediente_aux = $this->input->post('idexpedientes');
+			// $idexpedientes = $_POST['idexpedientes'];
+				$idcentrocfg=$idcfg;
+				// $idexpediente=$idex;
+				// $idexpediente_aux=$idex.',260234, 260234';
+				$porciones = explode(",", $idexpediente_aux);
+
+				$nivel=$niv;
+				$nivel_educativo="";
+
+			  $pdf = new My_tcpdf('P', 'mm', 'A4', true, 'UTF-8', false);
+
+				// set document (meta) information
+				$pdf->SetCreator(PDF_CREATOR);
+				$pdf->SetAuthor('SEP');
+				$pdf->SetTitle('Constancia de estudios');
+				$pdf->SetSubject('');
+				$pdf->SetKeywords('');
+
+				if ($nivel=="pree"){
+						$nivel_educativo="preescolar";
+				}
+				elseif($nivel_educativo=="prim"){
+						$nivel_educativo="primaria";
+				}
+				else{
+						$nivel_educativo="secundaria";
+				}
+
+			// add a page
+			$pdf->AddPage();
+
+			//imagenes
+
+			// set JPEG quality
+			$pdf->setJPEGQuality(75);
+
+			$pdf->Image('assets/img/logoGEP.png', 15,10, 60, 20, '', '', '', true, 150, '', false, false, 1, false, false, false);
+			$pdf->CreateTextBox('Lista de Asistencia', 5, 15, 180, 10, 16, 'B', 'C');
+			$pdf->CreateTextBox('CCT:', 60, 25, 180, 10, 10, '', 'L');
+			$pdf->CreateTextBox('ESCUELA:', 60, 30, 180, 10, 10, '', 'L');
+
+			$pdf->CreateTextBox('GRUPO:', 0, 40, 180, 10, 10, '', 'L');
+			$pdf->CreateTextBox('TURNO:', 0, 40, 180, 10, 10, '', 'C');
+			$pdf->CreateTextBox('CICLO:', 0, 40, 180, 10, 10, '', 'R');
+
+			$pdf->CreateTextBox('MATERIA: ___________________________________________________', 0, 50, 180, 10, 10, '', 'L');
+			$pdf->CreateTextBox('DOCENTE: ___________________________________________________', 0, 60, 180, 10, 10, '', 'L');
+			$pdf->CreateTextBox('MES: _______________', 0, 60, 180, 10, 10, '', 'R');
+
+$html_aux = '
+<table WIDTH="532" style="padding:2px;">
+			<tr>
+					<td style="border: 1px solid black; width:5%" align="center"><span style="font-weight: bold;">No. </span></td>
+					<td style="border: 1px solid black; width:30%" align="center"><span style="font-weight: bold;">Nombre del (de la) alumno(a)</span></td>
+					<td style="border: 1px solid black; width:15%" align="center"><span style="font-weight: bold;">NIA</span></td>
+					<td style="border: 1px solid black; width:30%" align="center"><span style="font-weight: bold;">Asistencia y rasgos a evaluar</span></td>
+					<td style="border: 1px solid black; width:10%" align="center"><span style="font-weight: bold;">Calif</span></td>
+					<td style="border: 1px solid black; width:10%" align="center"><span style="font-weight: bold;">Inasis</span></td>
+
+			</tr>
+			</table>
+			';
+
+
+			$html = <<<EOT
+			$html_aux
+EOT;
+
+			// writeHTMLCell(w, h, x, y, html = '', border = 0, ln = 0, fill = 0, reseth = true, align = '', autopadding = true)
+			$pdf->writeHTMLCell(100,30,20,80, $html, 0, 1, 0, true, '', true);
+
+
+	  	//Close and output PDF document
+			$pdf->Output('lista_asistencia.pdf', 'I');
+		}// verifica_sesion_redirige
+}// constancia_estudios()
+
 }// class
 
 
